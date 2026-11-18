@@ -20,8 +20,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="${GITHUB_REF_NAME}"
-          APK="apk/app-release.apk"
+          APK="apk/myencoreV${TAG#v}.apk"
+          if [ ! -f "$APK" ]; then
+            APK=$(ls -1 apk/*.apk 2>/dev/null | sort -V | tail -n 1)
+          fi
           test -f "$APK"
+          echo "Release asset: $APK"
           if gh release view "$TAG" --repo "${{ github.repository }}" > /dev/null 2>&1; then
             gh release upload "$TAG" "$APK" --repo "${{ github.repository }}" --clobber
           else

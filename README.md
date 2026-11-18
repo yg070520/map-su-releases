@@ -11,3 +11,6 @@ https://api.github.com/repos/yg070520/map-su-releases/releases/latest
 
 This repository contains release artifacts only; the application source stays
 in the private repository.
+
+Release assets are named `myencoreV<version>.apk` (for example
+`myencoreV1.7.apk`) so downloaded files from different versions never clash.
